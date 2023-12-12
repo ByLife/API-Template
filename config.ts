@@ -5,6 +5,12 @@ const BASE_URI = process.env.BASE_URI;
 const MONGO_USERNAME = process.env.MONGO_USERNAME;
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
+const SQL_DATABASE = process.env.SQL_DATABASE
+const SQL_HOST = process.env.SQL_HOST
+const SQL_USERNAME = process.env.SQL_USERNAME
+const SQL_PASSWORD = process.env.SQL_PASSWORD
+const SQL_PORT = process.env.SQL_PORT
+
 export const config = { // This is the config file for the application.
     application: {
         name: "Template API",
@@ -23,6 +29,17 @@ export const config = { // This is the config file for the application.
     mongo: {
         username: MONGO_USERNAME,
         url: (process.env.MONGO_URL?.replace("<USERNAME>", MONGO_USERNAME!).replace("<PASSWORD>", MONGO_PASSWORD!))!,
+    },
+    sql: {
+        /* 
+                    const sequelize = new Sequelize(config.sql.database, config.sql.username, config.sql.password, {
+                host: config.sql.host,
+                */
+        database: SQL_DATABASE || "admin",
+        host: SQL_HOST || "localhost",
+        username: SQL_USERNAME || "admin",
+        password: SQL_PASSWORD || "admin",
+        port: Number(SQL_PORT) || 3306,
     },
     api : {
         url : BASE_URI,
