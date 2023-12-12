@@ -31,6 +31,3 @@ Anyone is welcome to contribute to this project.
 
 ## License
 This project is under the MIT license.
-# API-Template
-# API-Template
-# API-Template
