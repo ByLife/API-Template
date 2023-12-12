@@ -86,7 +86,7 @@ export class Autoload { // This is the class that starts the server
     
             if (fs.statSync(fullPath).isDirectory()) {
                 Autoload.autoloadRoutesFromDirectory(fullPath);
-            } else if (file.endsWith('.ts')) {
+            } else if (file.endsWith('.ts') || file.endsWith('.js')) {
                 const route = require(fullPath).default;
                 if (route && typeof route.run === 'function' && route.method && route.name) {
                     const httpMethod = route.method.toLowerCase() as keyof express.Application;
