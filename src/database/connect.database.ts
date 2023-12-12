@@ -7,10 +7,9 @@ mongoose.set('strictQuery', false);
 
 export default function DB_Connect(): Promise<void> {
     return new Promise((resolve, reject) => {
-        const dbType = process.env.DB_TYPE; // For example, 'mongo' or 'sql'
+        const dbType = process.env.DB_TYPE?.toLowerCase();
 
         if (dbType === 'mongo') {
-            // Connect to MongoDB
             mongoose.set('strictQuery', false);
             mongoose
                 .connect(config.mongo.url, { retryWrites: true, w: 'majority' })
@@ -25,11 +24,10 @@ export default function DB_Connect(): Promise<void> {
                     reject(error);
                 });
         } else if (dbType === 'sql') {
-            // Connect to SQL Database
             const sequelize = new Sequelize(config.sql.database, config.sql.username, config.sql.password, {
                 host: config.sql.host,
-                port: config.sql.port, // Include port here
-                dialect: 'mysql' // Or 'postgres', 'sqlite', etc.
+                port: config.sql.port,
+                dialect: 'mysql'
             });
 
             sequelize.authenticate()
